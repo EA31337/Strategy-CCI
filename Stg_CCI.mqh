@@ -36,8 +36,7 @@ struct Stg_CCI_Params_Defaults : StgParams {
   Stg_CCI_Params_Defaults()
       : StgParams(::CCI_SignalOpenMethod, ::CCI_SignalOpenFilterMethod, ::CCI_SignalOpenLevel,
                   ::CCI_SignalOpenBoostMethod, ::CCI_SignalCloseMethod, ::CCI_SignalCloseLevel, ::CCI_PriceStopMethod,
-                  ::CCI_PriceStopLevel, ::CCI_TickFilterMethod, ::CCI_MaxSpread, ::CCI_Shift,
-                  ::CCI_OrderCloseTime) {}
+                  ::CCI_PriceStopLevel, ::CCI_TickFilterMethod, ::CCI_MaxSpread, ::CCI_Shift, ::CCI_OrderCloseTime) {}
 } stg_cci_defaults;
 
 // Struct to define strategy parameters to override.
