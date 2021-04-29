@@ -46,7 +46,7 @@ struct Stg_CCI_Params : StgParams {
 
   // Struct constructors.
   Stg_CCI_Params(CCIParams &_iparams, StgParams &_sparams)
-      : iparams(indi_cci_defaults, _iparams.tf), sparams(stg_cci_defaults) {
+      : iparams(indi_cci_defaults, _iparams.tf.GetTf()), sparams(stg_cci_defaults) {
     iparams = _iparams;
     sparams = _sparams;
   }
