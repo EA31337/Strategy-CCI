@@ -8,13 +8,13 @@ INPUT string __CCI_Parameters__ = "-- CCI strategy params --";  // >>> CCI <<<
 INPUT float CCI_LotSize = 0;                                    // Lot size
 INPUT int CCI_SignalOpenMethod = 0;                             // Signal open method (-63-63)
 INPUT float CCI_SignalOpenLevel = 50.0;                         // Signal open level (-100-100)
-INPUT int CCI_SignalOpenFilterMethod = 1;                       // Signal open filter method
+INPUT int CCI_SignalOpenFilterMethod = 32;                      // Signal open filter method
 INPUT int CCI_SignalOpenBoostMethod = 0;                        // Signal open boost method
 INPUT int CCI_SignalCloseMethod = 0;                            // Signal close method (-63-63)
 INPUT float CCI_SignalCloseLevel = 50.0;                        // Signal close level (-100-100)
 INPUT int CCI_PriceStopMethod = 0;                              // Price stop method (0-6)
 INPUT float CCI_PriceStopLevel = 0;                             // Price stop level
-INPUT int CCI_TickFilterMethod = 1;                             // Tick filter method
+INPUT int CCI_TickFilterMethod = 32;                            // Tick filter method
 INPUT float CCI_MaxSpread = 4.0;                                // Max spread to trade (pips)
 INPUT short CCI_Shift = 1;                                      // Shift (0 for default)
 INPUT int CCI_OrderCloseTime = -20;                             // Order close time in mins (>0) or bars (<0)
@@ -104,30 +104,17 @@ class Stg_CCI : public Strategy {
       // Returns false when indicator data is not valid.
       return false;
     }
+    IndicatorSignal _signals = _indi.GetSignals(4, _shift);
     switch (_cmd) {
       case ORDER_TYPE_BUY:
         _result = _indi[CURR][0] > _level || _indi[CURR][0] < -_level;
-        _result &= _indi.IsIncreasing(3);
-        if (_method != 0) {
-          if (METHOD(_method, 0)) _result &= _indi.IsIncreasing(2, 0, 3);
-          if (METHOD(_method, 1)) _result &= _indi[PREV][0] > _indi[PPREV][0];
-          if (METHOD(_method, 2)) _result &= _indi[PREV][0] < -_level;
-          if (METHOD(_method, 3)) _result &= _indi[PPREV][0] < -_level;
-          if (METHOD(_method, 4)) _result &= _indi[CURR][0] - _indi[PREV][0] > _indi[PREV][0] - _indi[PPREV][0];
-          if (METHOD(_method, 5)) _result &= _indi[PPREV][0] > 0;
-        }
+        _result &= _indi.IsIncreasing(1);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
       case ORDER_TYPE_SELL:
         _result = _indi[CURR][0] > _level || _indi[CURR][0] < -_level;
-        _result &= _indi.IsDecreasing(3);
-        if (_method != 0) {
-          if (METHOD(_method, 0)) _result &= _indi.IsDecreasing(2, 0, 3);
-          if (METHOD(_method, 1)) _result &= _indi[PREV][0] < _indi[PPREV][0];
-          if (METHOD(_method, 2)) _result &= _indi[PREV][0] > _level;
-          if (METHOD(_method, 3)) _result &= _indi[PPREV][0] > _level;
-          if (METHOD(_method, 4)) _result &= _indi[PREV][0] - _indi[CURR][0] > _indi[PPREV][0] - _indi[PREV][0];
-          if (METHOD(_method, 5)) _result &= _indi[PPREV][0] < 0;
-        }
+        _result &= _indi.IsDecreasing(1);
+        _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
     }
     return _result;
