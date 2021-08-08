@@ -4,22 +4,21 @@
  */
 
 // User input params.
-INPUT string __CCI_Parameters__ = "-- CCI strategy params --";  // >>> CCI <<<
-INPUT float CCI_LotSize = 0;                                    // Lot size
-INPUT int CCI_SignalOpenMethod = 2;                             // Signal open method (-127-127)
-INPUT float CCI_SignalOpenLevel = 50.0;                         // Signal open level (-100-100)
-INPUT int CCI_SignalOpenFilterMethod = 32;                      // Signal open filter method
-INPUT int CCI_SignalOpenBoostMethod = 0;                        // Signal open boost method
-INPUT int CCI_SignalCloseMethod = 2;                            // Signal close method (-127-127)
-INPUT float CCI_SignalCloseLevel = 50.0;                        // Signal close level (-100-100)
-INPUT int CCI_PriceStopMethod = 1;                              // Price stop method (0-6)
-INPUT float CCI_PriceStopLevel = 0;                             // Price stop level
-INPUT int CCI_TickFilterMethod = 32;                            // Tick filter method
-INPUT float CCI_MaxSpread = 4.0;                                // Max spread to trade (pips)
-INPUT short CCI_Shift = 1;                                      // Shift (0 for default)
-INPUT int CCI_OrderCloseTime = -20;                             // Order close time in mins (>0) or bars (<0)
-INPUT string __CCI_Indi_CCI_Parameters__ =
-    "-- CCI strategy: CCI indicator params --";                               // >>> CCI strategy: CCI indicator <<<
+INPUT_GROUP("CCI strategy: strategy params");
+INPUT float CCI_LotSize = 0;                // Lot size
+INPUT int CCI_SignalOpenMethod = 2;         // Signal open method (-127-127)
+INPUT float CCI_SignalOpenLevel = 50.0;     // Signal open level (-100-100)
+INPUT int CCI_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT int CCI_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT int CCI_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT float CCI_SignalCloseLevel = 50.0;    // Signal close level (-100-100)
+INPUT int CCI_PriceStopMethod = 1;          // Price stop method (0-6)
+INPUT float CCI_PriceStopLevel = 0;         // Price stop level
+INPUT int CCI_TickFilterMethod = 32;        // Tick filter method
+INPUT float CCI_MaxSpread = 4.0;            // Max spread to trade (pips)
+INPUT short CCI_Shift = 1;                  // Shift (0 for default)
+INPUT int CCI_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
+INPUT_GROUP("CCI strategy: CCI indicator params");
 INPUT int CCI_Indi_CCI_Period = 20;                                           // Period
 INPUT ENUM_APPLIED_PRICE CCI_Indi_CCI_Applied_Price = (ENUM_APPLIED_PRICE)2;  // Applied Price
 INPUT int CCI_Indi_CCI_Shift = 0;                                             // Shift
