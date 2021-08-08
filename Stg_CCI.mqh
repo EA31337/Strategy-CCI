@@ -11,6 +11,7 @@ INPUT float CCI_SignalOpenLevel = 50.0;     // Signal open level (-100-100)
 INPUT int CCI_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int CCI_SignalOpenBoostMethod = 0;    // Signal open boost method
 INPUT int CCI_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT int CCI_SignalCloseFilter = 0;        // Signal close filter (-127-127)
 INPUT float CCI_SignalCloseLevel = 50.0;    // Signal close level (-100-100)
 INPUT int CCI_PriceStopMethod = 1;          // Price stop method (0-6)
 INPUT float CCI_PriceStopLevel = 0;         // Price stop level
@@ -34,8 +35,9 @@ struct Indi_CCI_Params_Defaults : CCIParams {
 struct Stg_CCI_Params_Defaults : StgParams {
   Stg_CCI_Params_Defaults()
       : StgParams(::CCI_SignalOpenMethod, ::CCI_SignalOpenFilterMethod, ::CCI_SignalOpenLevel,
-                  ::CCI_SignalOpenBoostMethod, ::CCI_SignalCloseMethod, ::CCI_SignalCloseLevel, ::CCI_PriceStopMethod,
-                  ::CCI_PriceStopLevel, ::CCI_TickFilterMethod, ::CCI_MaxSpread, ::CCI_Shift, ::CCI_OrderCloseTime) {}
+                  ::CCI_SignalOpenBoostMethod, ::CCI_SignalCloseMethod, ::CCI_SignalCloseFilter, ::CCI_SignalCloseLevel,
+                  ::CCI_PriceStopMethod, ::CCI_PriceStopLevel, ::CCI_TickFilterMethod, ::CCI_MaxSpread, ::CCI_Shift,
+                  ::CCI_OrderCloseTime) {}
 } stg_cci_defaults;
 
 // Struct to define strategy parameters to override.
