@@ -9,6 +9,7 @@ INPUT float CCI_LotSize = 0;                // Lot size
 INPUT int CCI_SignalOpenMethod = 2;         // Signal open method (-127-127)
 INPUT float CCI_SignalOpenLevel = 50.0;     // Signal open level (-100-100)
 INPUT int CCI_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT int CCI_SignalOpenFilterTime = 6;     // Signal open filter time
 INPUT int CCI_SignalOpenBoostMethod = 0;    // Signal open boost method
 INPUT int CCI_SignalCloseMethod = 2;        // Signal close method (-127-127)
 INPUT int CCI_SignalCloseFilter = 0;        // Signal close filter (-127-127)
@@ -42,6 +43,7 @@ struct Stg_CCI_Params_Defaults : StgParams {
     Set(STRAT_PARAM_OCL, CCI_OrderCloseLoss);
     Set(STRAT_PARAM_OCP, CCI_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, CCI_OrderCloseTime);
+    Set(STRAT_PARAM_SOFT, CCI_SignalOpenFilterTime);
   }
 } stg_cci_defaults;
 
