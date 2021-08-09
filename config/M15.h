@@ -18,7 +18,6 @@ struct Stg_CCI_Params_M15 : StgParams {
   Stg_CCI_Params_M15() : StgParams(stg_cci_defaults) {
     lot_size = 0;
     signal_open_method = 2;
-    signal_open_filter = 32;
     signal_open_level = (float)20.0;
     signal_open_boost = 0;
     signal_close_method = 2;
