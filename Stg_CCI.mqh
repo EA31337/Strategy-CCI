@@ -6,14 +6,14 @@
 // User input params.
 INPUT_GROUP("CCI strategy: strategy params");
 INPUT float CCI_LotSize = 0;                // Lot size
-INPUT int CCI_SignalOpenMethod = 2;         // Signal open method (-127-127)
-INPUT float CCI_SignalOpenLevel = 50.0;     // Signal open level (-100-100)
+INPUT int CCI_SignalOpenMethod = 10;        // Signal open method (-127-127)
+INPUT float CCI_SignalOpenLevel = 90.0;     // Signal open level (-100-100)
 INPUT int CCI_SignalOpenFilterMethod = 32;  // Signal open filter method
 INPUT int CCI_SignalOpenFilterTime = 6;     // Signal open filter time
 INPUT int CCI_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT int CCI_SignalCloseMethod = 2;        // Signal close method (-127-127)
+INPUT int CCI_SignalCloseMethod = 10;       // Signal close method (-127-127)
 INPUT int CCI_SignalCloseFilter = 0;        // Signal close filter (-127-127)
-INPUT float CCI_SignalCloseLevel = 50.0;    // Signal close level (-100-100)
+INPUT float CCI_SignalCloseLevel = 90.0;    // Signal close level (-100-100)
 INPUT int CCI_PriceStopMethod = 1;          // Price stop method (0-6)
 INPUT float CCI_PriceStopLevel = 0;         // Price stop level
 INPUT int CCI_TickFilterMethod = 32;        // Tick filter method
@@ -23,9 +23,9 @@ INPUT float CCI_OrderCloseLoss = 0;         // Order close loss
 INPUT float CCI_OrderCloseProfit = 0;       // Order close profit
 INPUT int CCI_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("CCI strategy: CCI indicator params");
-INPUT int CCI_Indi_CCI_Period = 20;                                           // Period
-INPUT ENUM_APPLIED_PRICE CCI_Indi_CCI_Applied_Price = (ENUM_APPLIED_PRICE)2;  // Applied Price
-INPUT int CCI_Indi_CCI_Shift = 0;                                             // Shift
+INPUT int CCI_Indi_CCI_Period = 20;                                   // Period
+INPUT ENUM_APPLIED_PRICE CCI_Indi_CCI_Applied_Price = PRICE_TYPICAL;  // Applied Price
+INPUT int CCI_Indi_CCI_Shift = 0;                                     // Shift
 
 // Structs.
 
@@ -114,13 +114,13 @@ class Stg_CCI : public Strategy {
     IndicatorSignal _signals = _indi.GetSignals(4, _shift);
     switch (_cmd) {
       case ORDER_TYPE_BUY:
-        _result = _indi[CURR][0] > _level || _indi[CURR][0] < -_level;
-        _result &= _indi.IsIncreasing(1);
+        _result = _indi[CURR][0] < -_level;
+        _result &= _indi.IsIncreasing(2);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
       case ORDER_TYPE_SELL:
-        _result = _indi[CURR][0] > _level || _indi[CURR][0] < -_level;
-        _result &= _indi.IsDecreasing(1);
+        _result = _indi[CURR][0] > _level;
+        _result &= _indi.IsDecreasing(2);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
     }
