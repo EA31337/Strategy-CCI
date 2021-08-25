@@ -21,7 +21,7 @@ INPUT float CCI_MaxSpread = 4.0;            // Max spread to trade (pips)
 INPUT short CCI_Shift = 1;                  // Shift (0 for default)
 INPUT float CCI_OrderCloseLoss = 0;         // Order close loss
 INPUT float CCI_OrderCloseProfit = 0;       // Order close profit
-INPUT int CCI_OrderCloseTime = -20;         // Order close time in mins (>0) or bars (<0)
+INPUT int CCI_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("CCI strategy: CCI indicator params");
 INPUT int CCI_Indi_CCI_Period = 20;                                   // Period
 INPUT ENUM_APPLIED_PRICE CCI_Indi_CCI_Applied_Price = PRICE_TYPICAL;  // Applied Price
