@@ -40,6 +40,7 @@ struct Stg_CCI_Params_Defaults : StgParams {
       : StgParams(::CCI_SignalOpenMethod, ::CCI_SignalOpenFilterMethod, ::CCI_SignalOpenLevel,
                   ::CCI_SignalOpenBoostMethod, ::CCI_SignalCloseMethod, ::CCI_SignalCloseFilter, ::CCI_SignalCloseLevel,
                   ::CCI_PriceStopMethod, ::CCI_PriceStopLevel, ::CCI_TickFilterMethod, ::CCI_MaxSpread, ::CCI_Shift) {
+    Set(STRAT_PARAM_LS, CCI_LotSize);
     Set(STRAT_PARAM_OCL, CCI_OrderCloseLoss);
     Set(STRAT_PARAM_OCP, CCI_OrderCloseProfit);
     Set(STRAT_PARAM_OCT, CCI_OrderCloseTime);
