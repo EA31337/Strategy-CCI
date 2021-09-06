@@ -19,8 +19,8 @@ INPUT float CCI_PriceStopLevel = 2;         // Price stop level
 INPUT int CCI_TickFilterMethod = 32;        // Tick filter method
 INPUT float CCI_MaxSpread = 4.0;            // Max spread to trade (pips)
 INPUT short CCI_Shift = 1;                  // Shift (0 for default)
-INPUT float CCI_OrderCloseLoss = 0;         // Order close loss
-INPUT float CCI_OrderCloseProfit = 0;       // Order close profit
+INPUT float CCI_OrderCloseLoss = 80;        // Order close loss
+INPUT float CCI_OrderCloseProfit = 80;      // Order close profit
 INPUT int CCI_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("CCI strategy: CCI indicator params");
 INPUT int CCI_Indi_CCI_Period = 20;                                   // Period
