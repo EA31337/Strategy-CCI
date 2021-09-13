@@ -32,7 +32,7 @@ INPUT int CCI_Indi_CCI_Shift = 0;                                     // Shift
 // Defines struct with default user indicator values.
 struct Indi_CCI_Params_Defaults : CCIParams {
   Indi_CCI_Params_Defaults() : CCIParams(::CCI_Indi_CCI_Period, ::CCI_Indi_CCI_Applied_Price, ::CCI_Indi_CCI_Shift) {}
-} indi_cci_defaults;
+};
 
 // Defines struct with default user strategy values.
 struct Stg_CCI_Params_Defaults : StgParams {
@@ -46,7 +46,7 @@ struct Stg_CCI_Params_Defaults : StgParams {
     Set(STRAT_PARAM_OCT, CCI_OrderCloseTime);
     Set(STRAT_PARAM_SOFT, CCI_SignalOpenFilterTime);
   }
-} stg_cci_defaults;
+};
 
 #ifdef __config__
 // Loads pair specific param values.
@@ -66,7 +66,9 @@ class Stg_CCI : public Strategy {
 
   static Stg_CCI *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
+    Indi_CCI_Params_Defaults indi_cci_defaults;
     CCIParams _indi_params(indi_cci_defaults, _tf);
+    Stg_CCI_Params_Defaults stg_cci_defaults;
     StgParams _stg_params(stg_cci_defaults);
 #ifdef __config__
     SetParamsByTf<CCIParams>(_indi_params, _tf, indi_cci_m1, indi_cci_m5, indi_cci_m15, indi_cci_m30, indi_cci_h1,
