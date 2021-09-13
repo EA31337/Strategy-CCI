@@ -77,7 +77,6 @@ class Stg_CCI : public Strategy {
                              stg_cci_h8);
 #endif
     // Initialize indicator.
-    CCIParams cci_params(_indi_params);
     _stg_params.SetIndicator(new Indi_CCI(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
