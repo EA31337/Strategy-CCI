@@ -48,19 +48,6 @@ struct Stg_CCI_Params_Defaults : StgParams {
   }
 } stg_cci_defaults;
 
-// Struct to define strategy parameters to override.
-struct Stg_CCI_Params : StgParams {
-  CCIParams iparams;
-  StgParams sparams;
-
-  // Struct constructors.
-  Stg_CCI_Params(CCIParams &_iparams, StgParams &_sparams)
-      : iparams(indi_cci_defaults, _iparams.tf.GetTf()), sparams(stg_cci_defaults) {
-    iparams = _iparams;
-    sparams = _sparams;
-  }
-};
-
 #ifdef __config__
 // Loads pair specific param values.
 #include "config/H1.h"
