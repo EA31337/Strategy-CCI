@@ -67,13 +67,9 @@ class Stg_CCI : public Strategy {
 
   static Stg_CCI *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
-    Indi_CCI_Params_Defaults indi_cci_defaults;
-    IndiCCIParams _indi_params(indi_cci_defaults, _tf);
     Stg_CCI_Params_Defaults stg_cci_defaults;
     StgParams _stg_params(stg_cci_defaults);
 #ifdef __config__
-    SetParamsByTf<IndiCCIParams>(_indi_params, _tf, indi_cci_m1, indi_cci_m5, indi_cci_m15, indi_cci_m30, indi_cci_h1,
-                                 indi_cci_h4, indi_cci_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_cci_m1, stg_cci_m5, stg_cci_m15, stg_cci_m30, stg_cci_h1, stg_cci_h4,
                              stg_cci_h8);
 #endif
@@ -82,8 +78,16 @@ class Stg_CCI : public Strategy {
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_CCI(_stg_params, _tparams, _cparams, "CCI");
-    _strat.SetIndicator(new Indi_CCI(_indi_params));
     return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
+    Indi_CCI_Params_Defaults indi_cci_defaults;
+    IndiCCIParams _indi_params(indi_cci_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_CCI(_indi_params));
   }
 
   /**
