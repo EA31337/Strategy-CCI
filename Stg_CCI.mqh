@@ -29,12 +29,6 @@ INPUT int CCI_Indi_CCI_Shift = 0;                                     // Shift
 
 // Structs.
 
-// Defines struct with default user indicator values.
-struct Indi_CCI_Params_Defaults : IndiCCIParams {
-  Indi_CCI_Params_Defaults()
-      : IndiCCIParams(::CCI_Indi_CCI_Period, ::CCI_Indi_CCI_Applied_Price, ::CCI_Indi_CCI_Shift) {}
-};
-
 // Defines struct with default user strategy values.
 struct Stg_CCI_Params_Defaults : StgParams {
   Stg_CCI_Params_Defaults()
@@ -85,8 +79,8 @@ class Stg_CCI : public Strategy {
    * Event on strategy's init.
    */
   void OnInit() {
-    Indi_CCI_Params_Defaults indi_cci_defaults;
-    IndiCCIParams _indi_params(indi_cci_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    IndiCCIParams _indi_params(::CCI_Indi_CCI_Period, ::CCI_Indi_CCI_Applied_Price, ::CCI_Indi_CCI_Shift);
+    _indi_params.SetTf(Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
     SetIndicator(new Indi_CCI(_indi_params));
   }
 
