@@ -105,12 +105,12 @@ class Stg_CCI : public Strategy {
     switch (_cmd) {
       case ORDER_TYPE_BUY:
         _result = _indi[CURR][0] < -_level;
-        _result &= _indi.IsIncreasing(2);
+        _result &= _indi.IsIncreasing(2, 0, _shift);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
       case ORDER_TYPE_SELL:
         _result = _indi[CURR][0] > _level;
-        _result &= _indi.IsDecreasing(2);
+        _result &= _indi.IsDecreasing(2, 0, _shift);
         _result &= _method > 0 ? _signals.CheckSignals(_method) : _signals.CheckSignalsAll(-_method);
         break;
     }
