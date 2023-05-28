@@ -59,7 +59,7 @@ class Stg_CCI : public Strategy {
   Stg_CCI(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
-  static Stg_CCI *Init(ENUM_TIMEFRAMES _tf = NULL) {
+  static Stg_CCI *Init(ENUM_TIMEFRAMES _tf = NULL, EA* _ea = NULL) {
     // Initialize strategy initial values.
     Stg_CCI_Params_Defaults stg_cci_defaults;
     StgParams _stg_params(stg_cci_defaults);
